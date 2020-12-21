@@ -32,10 +32,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  int _counterDouble = 0;
 
   void _incrementCounter() {
     setState(() {
       _counter++;
+      _counterDouble = _counter * 2;
     });
   }
 
@@ -74,11 +76,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  onPressed: () {
-                    Navigator.push(
+                  onPressed: () async {
+                    final result = await Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DoublePage()),
+                      MaterialPageRoute(builder: (context) => DoublePage(_counterDouble)),
                     );
+                    print('last result is $result');
                   },
                 ),
               ],
